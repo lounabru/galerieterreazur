@@ -170,14 +170,21 @@ if (contact) {
 }
 
 // ===== 5. RECHERCHE INTERACTIVE =====
-var searchBtn = document.querySelector('.site-header .tools button[aria-label="Rechercher"]');
-if (searchBtn) {
-    var searchContainer = document.createElement('div');
-    searchContainer.className = 'search-container';
-    searchContainer.innerHTML = '<input type="text" id="site-search" placeholder="Rechercher une œuvre..." style="display:none; padding:0.3rem 0.5rem; font-size:0.8rem; border:1px solid #ddd5c6; border-radius:4px; margin-right:0.5rem;">';
-    searchBtn.parentNode.insertBefore(searchContainer, searchBtn);
+var searchBtn = document.querySelector('.tools button[aria-label="Rechercher"]');
+var toolsContainer = document.querySelector('.tools');
 
-    var searchInput = document.getElementById('site-search');
+if (searchBtn && toolsContainer) {
+    var searchInput = document.createElement('input');
+    searchInput.type = 'text';
+    searchInput.id = 'site-search';
+    searchInput.placeholder = 'Rechercher...';
+    searchInput.style.display = 'none';
+    searchInput.style.width = '100px';
+    searchInput.style.padding = '0.2rem';
+    searchInput.style.fontSize = '0.75rem';
+    searchInput.style.border = '1px solid #ddd5c6';
+    
+    toolsContainer.insertBefore(searchInput, searchBtn);
 
     searchBtn.addEventListener('click', function () {
         if (searchInput.style.display === 'none') {
@@ -197,14 +204,15 @@ if (searchBtn) {
 
 function filtrerRecherche(terme) {
     var produits = document.querySelectorAll('.card');
-    if (produits.length === 0) return;
-    
     produits.forEach(function (card) {
         var titre = card.querySelector('h3').textContent.toLowerCase();
         if (titre.includes(terme)) {
             card.style.display = '';
         } else {
             card.style.display = 'none';
+        }
+    });
+}
         }
     });
 }
