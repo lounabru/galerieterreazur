@@ -8,42 +8,71 @@ bouton.addEventListener('click', function () {
     menu.classList.toggle('open');
 });
 
-// ===== 2. PANIER ET MENU DÉROULANT =====
+// ===== 2. PANIER, COMMANDE ET PAIEMENT SIMULÉ =====
 var cartButton = document.querySelector('.cart');
 var toolsContainer = document.querySelector('.tools');
 var compteur = document.getElementById('cart-count');
 var boutonsAjout = document.querySelectorAll('.add');
 
-// Création du conteneur déroulant
+// Création du menu déroulant du panier
 var cartDropdown = document.createElement('div');
 cartDropdown.className = 'cart-dropdown';
-cartDropdown.innerHTML = '<ul id="cart-items"><li>Votre panier est vide</li></ul><div class="cart-total" id="cart-total">Total : 0 €</div>';
+cartDropdown.innerHTML =
+    '<ul id="cart-items"><li>Votre panier est vide</li></ul>' +
+    '<div class="cart-total" id="cart-total">Total : 0 €</div>' +
+    '<button type="button" class="btn checkout-btn" id="checkout-btn" style="display:none; width:100%; margin-top:0.8rem;">Valider la commande</button>';
 toolsContainer.appendChild(cartDropdown);
+
+// Création de la fenêtre (modale) de paiement
+var modal = document.createElement('div');
+modal.className = 'pay-modal';
+modal.innerHTML =
+    '<div class="pay-box">' +
+        '<button type="button" class="close-pay" id="close-pay">✕</button>' +
+        '<h3>Finaliser votre commande</h3>' +
+        '<p id="pay-summary" style="font-size:0.9rem; color:var(--brun); margin-bottom:1rem;"></p>' +
+        '<form id="pay-form">' +
+            '<label>Nom complet</label>' +
+            '<input type="text" required placeholder="Camille Laurent">' +
+            '<label>Numéro de carte (simulation)</label>' +
+            '<input type="text" required placeholder="4970 •••• •••• 1234" maxlength="19">' +
+            '<div style="display:flex; gap:0.5rem;">' +
+                '<div style="flex:1;"><label>Expiration</label><input type="text" required placeholder="09/28" maxlength="5"></div>' +
+                '<div style="flex:1;"><label>CVC</label><input type="text" required placeholder="123" maxlength="3"></div>' +
+            '</div>' +
+            '<button type="submit" class="btn" style="width:100%; margin-top:1rem;">Payer maintenant</button>' +
+        '</form>' +
+        '<p id="pay-msg" style="margin-top:0.8rem; font-weight:600; color:var(--bleu);"></p>' +
+    '</div>';
+document.body.appendChild(modal);
 
 var cartItemsList = document.getElementById('cart-items');
 var cartTotalElem = document.getElementById('cart-total');
+var checkoutBtn = document.getElementById('checkout-btn');
+var closePayBtn = document.getElementById('close-pay');
+var payForm = document.getElementById('pay-form');
+var paySummary = document.getElementById('pay-summary');
+var payMsg = document.getElementById('pay-msg');
 var panier = [];
 
-// Ouvrir / fermer au clic sur l'icône
+// Ouvrir / fermer le panier
 cartButton.addEventListener('click', function (e) {
     e.stopPropagation();
     cartDropdown.classList.toggle('open');
 });
 
-// Fermer en cliquant ailleurs sur la page
 document.addEventListener('click', function (e) {
     if (!toolsContainer.contains(e.target)) {
         cartDropdown.classList.remove('open');
     }
 });
 
-// Ajout des produits
+// Ajouter un article
 for (var i = 0; i < boutonsAjout.length; i++) {
     boutonsAjout[i].addEventListener('click', function () {
         var card = this.closest('.card');
         var nom = card.querySelector('h3').textContent.trim();
-        var prixTexte = card.querySelector('p').textContent.trim();
-        var prix = parseInt(prixTexte);
+        var prix = parseInt(card.querySelector('p').textContent.trim());
 
         panier.push({ nom: nom, prix: prix });
         mettreAJourPanier();
@@ -52,10 +81,11 @@ for (var i = 0; i < boutonsAjout.length; i++) {
 
 function mettreAJourPanier() {
     compteur.textContent = panier.length;
-    
+
     if (panier.length === 0) {
         cartItemsList.innerHTML = '<li>Votre panier est vide</li>';
         cartTotalElem.textContent = 'Total : 0 €';
+        checkoutBtn.style.display = 'none';
         return;
     }
 
@@ -67,7 +97,33 @@ function mettreAJourPanier() {
     }
     cartItemsList.innerHTML = html;
     cartTotalElem.textContent = 'Total : ' + total + ' €';
+    checkoutBtn.style.display = 'block';
 }
+
+// Ouvrir la fenêtre de paiement
+checkoutBtn.addEventListener('click', function () {
+    var total = panier.reduce(function (acc, item) { return acc + item.prix; }, 0);
+    paySummary.textContent = panier.length + ' œuvre(s) · Montant à régler : ' + total + ' €';
+    payMsg.textContent = '';
+    payForm.style.display = 'block';
+    cartDropdown.classList.remove('open');
+    modal.classList.add('open');
+});
+
+// Fermer la fenêtre de paiement
+closePayBtn.addEventListener('click', function () {
+    modal.classList.remove('open');
+});
+
+// Validation du paiement simulé
+payForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    payForm.style.display = 'none';
+    payMsg.textContent = '✓ Paiement confirmé ! Merci pour votre commande chez Terre Azur.';
+    panier = [];
+    mettreAJourPanier();
+    payForm.reset();
+});
 
 // ===== 3. FILTRES DE LA BOUTIQUE =====
 var filtres = document.querySelectorAll('.filters button');
