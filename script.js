@@ -157,10 +157,8 @@ for (var j = 0; j < filtres.length; j++) {
 } else {
     produits[b].style.display = 'none';
 }
-            }
-        }
-    });
-}
+           }
+});
 
 // ===== 4. FORMULAIRES (message de confirmation) =====
 var newsletter = document.getElementById('news');
