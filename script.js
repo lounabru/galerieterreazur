@@ -170,3 +170,99 @@ if (contact) {
     });
 }
 
+// ===== 5. RECHERCHE (loupe) =====
+var loupe = document.querySelector('[aria-label="Rechercher"]');
+
+// Création de la zone de recherche (comme le panier, elle s'ouvre sous les icônes)
+var searchBox = document.createElement('div');
+searchBox.className = 'search-box';
+searchBox.innerHTML =
+    '<form id="search-form">' +
+        '<input type="search" id="search-input" placeholder="Rechercher une pièce…" aria-label="Rechercher une pièce">' +
+        '<button type="submit" class="btn">OK</button>' +
+    '</form>' +
+    '<p id="search-msg"></p>';
+toolsContainer.appendChild(searchBox);
+
+var searchForm = document.getElementById('search-form');
+var searchInput = document.getElementById('search-input');
+var searchMsg = document.getElementById('search-msg');
+
+// Enlève les accents et les majuscules pour que "equilibre" trouve "Équilibre"
+function normaliser(texte) {
+    return texte.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+}
+
+// Affiche seulement les pièces dont le nom contient le mot cherché
+function rechercher(mot) {
+    var recherche = normaliser(mot.trim());
+    var trouves = 0;
+
+    for (var k = 0; k < produits.length; k++) {
+        var nomProduit = normaliser(produits[k].querySelector('h3').textContent);
+        if (recherche === '' || nomProduit.indexOf(recherche) !== -1) {
+            produits[k].style.display = '';
+            trouves++;
+        } else {
+            produits[k].style.display = 'none';
+        }
+    }
+
+    // On remet "Toutes les pièces" en filtre actif
+    for (var m = 0; m < filtres.length; m++) {
+        filtres[m].classList.remove('on');
+    }
+    if (filtres.length > 0) {
+        filtres[0].classList.add('on');
+    }
+
+    if (recherche !== '' && trouves === 0) {
+        searchMsg.textContent = 'Aucune pièce trouvée.';
+    } else {
+        searchMsg.textContent = '';
+    }
+}
+
+// Ouvrir / fermer la zone de recherche
+if (loupe) {
+    loupe.addEventListener('click', function (e) {
+        e.stopPropagation();
+        cartDropdown.classList.remove('open');
+        searchBox.classList.toggle('open');
+        if (searchBox.classList.contains('open')) {
+            searchInput.focus();
+        }
+    });
+}
+
+// Ouvrir le panier ferme la recherche
+cartButton.addEventListener('click', function () {
+    searchBox.classList.remove('open');
+});
+
+// Cliquer ailleurs ferme la recherche
+document.addEventListener('click', function (e) {
+    if (!toolsContainer.contains(e.target)) {
+        searchBox.classList.remove('open');
+    }
+});
+
+// Valider la recherche (touche Entrée ou bouton OK)
+searchForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var mot = searchInput.value;
+    if (document.getElementById('shop')) {
+        // On est sur la page boutique : on filtre directement
+        rechercher(mot);
+    } else {
+        // On est sur une autre page : on va à la boutique avec la recherche
+        window.location.href = 'boutique.html?q=' + encodeURIComponent(mot);
+    }
+});
+
+// Arrivée sur la boutique depuis une autre page avec une recherche
+var params = new URLSearchParams(window.location.search);
+if (params.get('q') && document.getElementById('shop')) {
+    searchInput.value = params.get('q');
+    rechercher(params.get('q'));
+}
