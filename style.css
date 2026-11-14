@@ -561,3 +561,52 @@ figure {
     text-align: right;
     color: var(--bleu);
 }
+
+/* ===== RECHERCHE (loupe) ===== */
+.search-box {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: #fff;
+    border: 1px solid #ddd5c6;
+    width: 260px;
+    padding: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.search-box.open {
+    display: block;
+}
+
+.search-box form {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.search-box input {
+    flex: 1;
+    min-width: 0;
+    padding: 0.5rem;
+    border: 1px solid #ddd5c6;
+    font: inherit;
+    font-size: 0.85rem;
+}
+
+.tools .search-box .btn {
+    background: var(--bleu);
+    color: #fff;
+    font-size: 0.85rem;
+    padding: 0.5rem 0.8rem;
+}
+
+.tools .search-box .btn:hover {
+    background: var(--brun);
+}
+
+.search-box p {
+    margin: 0.5rem 0 0;
+    font-size: 0.8rem;
+    color: var(--brun);
+}
