@@ -610,3 +610,101 @@ figure {
     font-size: 0.8rem;
     color: var(--brun);
 }
+
+/* ===== COMPTE CLIENT (smiley) ===== */
+.acc-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(29, 26, 20, 0.55);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.acc-modal.open {
+    display: flex;
+}
+
+.acc-box {
+    position: relative;
+    background: #fff;
+    width: 100%;
+    max-width: 380px;
+    max-height: 100%;
+    overflow-y: auto;
+    padding: 1.5rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.acc-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.7rem;
+    background: none;
+    border: 0;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--bleu);
+}
+
+.acc-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0.5rem 0 1rem;
+}
+
+.acc-tab {
+    flex: 1;
+    background: none;
+    border: 0;
+    border-bottom: 2px solid #ddd5c6;
+    padding: 0.5rem;
+    font: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: var(--brun);
+}
+
+.acc-tab.on {
+    border-bottom-color: var(--bleu);
+    color: var(--bleu);
+    font-weight: 600;
+}
+
+.acc-box h3 {
+    color: var(--bleu);
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.acc-box label {
+    display: block;
+    margin-top: 0.8rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.acc-box input {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #ddd5c6;
+    background: #fff;
+    font: inherit;
+}
+
+.acc-box .btn {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+#acc-msg {
+    margin: 0.8rem 0 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--bleu);
+}
