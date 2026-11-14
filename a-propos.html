@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Notre histoire – Terre Azur
+  </title>
+  <meta content="Terre Azur, galerie d’art et boutique de sculptures uniques, façonnées par la terre, inspirées par la mer." name="description"/>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;600&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&amp;display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <!-- EN-TÊTE : logo, menu et icônes -->
+  <header class="site-header">
+   <a class="logo" href="index.html">
+    <img alt="Terre Azur – Sculptures &amp; Art" height="158" src="images/logo.png" width="548"/>
+   </a>
+   <button aria-controls="menu" aria-expanded="false" aria-label="Ouvrir le menu" class="burger" type="button">
+    ☰
+   </button>
+   <nav aria-label="Navigation principale" id="menu">
+    <ul>
+     <li>
+      <a href="index.html">
+       Accueil
+      </a>
+     </li>
+     <li>
+      <a href="boutique.html">
+       Boutique
+      </a>
+     </li>
+     <li>
+      <a aria-current="page" href="a-propos.html">
+       À propos
+      </a>
+     </li>
+     <li>
+      <a href="galerie.html">
+       Galerie
+      </a>
+     </li>
+     <li>
+      <a href="contact.html">
+       Contact
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div class="tools">
+    <button aria-label="Rechercher" type="button">
+     ⌕
+    </button>
+    <button aria-label="Mon compte" type="button">
+     ☺
+    </button>
+    <button aria-label="Panier" class="cart" type="button">
+     🛒
+     <span id="cart-count">
+      0
+     </span>
+    </button>
+   </div>
+  </header>
+  <!-- CONTENU PRINCIPAL de la page -->
+  <main>
+   <!-- BANNIÈRE du haut de page (image de fond + titre) -->
+   <section class="hero hero-histoire">
+    <div class="in">
+     <p class="eyebrow">
+      L’art au service du vivant
+     </p>
+     <h1>
+      Notre histoire
+     </h1>
+     <p>
+      Une aventure humaine, entre la terre, la nature et la mer.
+     </p>
+    </div>
+   </section>
+   <section class="sec story">
+    <img alt="Les mains du sculpteur façonnant l’argile" loading="lazy" src="images/atelier-main.jpg"/>
+    <div>
+     <h2>
+      Une sculpture née de la nature et des mains
+     </h2>
+     <p>
+      Chez Terre Azur, chaque sculpture est le fruit d’un savoir-faire artisanal transmis avec passion. Nous travaillons la terre, la pierre et les matières nobles pour donner vie à des œuvres uniques, inspirées par la beauté brute de la nature et la force apaisante de la mer.
+     </p>
+     <p>
+      Nos créations naissent d’un dialogue constant entre la matière, la lumière et l’environnement qui nous entoure. Chaque pièce est façonnée à la main, avec patience et exigence, pour devenir une œuvre singulière, porteuse d’émotions et de sens.
+     </p>
+    </div>
+   </section>
+   <!-- SECTION de contenu -->
+   <section class="sec">
+    <h2>
+     Nos valeurs
+    </h2>
+    <ul class="grid4 vals">
+     <li>
+      <strong>
+       Authenticité
+      </strong>
+      <small>
+       Des pièces uniques, façonnées à la main.
+      </small>
+     </li>
+     <li>
+      <strong>
+       Nature
+      </strong>
+      <small>
+       Une inspiration sans fin.
+      </small>
+     </li>
+     <li>
+      <strong>
+       Qualité
+      </strong>
+      <small>
+       Des matériaux nobles et durables.
+      </small>
+     </li>
+     <li>
+      <strong>
+       Transmission
+      </strong>
+      <small>
+       Un artisanat vivant, porteur de sens.
+      </small>
+     </li>
+    </ul>
+    <blockquote>
+     « La mer nous inspire, la terre nous ancre, et vos émotions donnent vie à nos créations. »
+    </blockquote>
+   </section>
+  </main>
+  <!-- PIED DE PAGE : newsletter et mentions -->
+  <footer class="site-footer">
+   <img alt="Terre Azur" class="flogo" height="158" src="images/logo.png" width="548"/>
+   <!-- FORMULAIRE newsletter -->
+   <form class="news" id="news">
+    <label for="mail">
+     Recevez nos nouveautés et inspirations
+    </label>
+    <div>
+     <input id="mail" name="mail" placeholder="Votre adresse e-mail" required="" type="email"/>
+     <button class="btn" type="submit">
+      S’inscrire
+     </button>
+    </div>
+    <p id="news-msg" role="status">
+    </p>
+   </form>
+   <p class="legal">
+    © 2025 Terre Azur. Tous droits réservés. · Mentions légales · CGV · Contact
+   </p>
+  </footer>
+  <!-- On relie le fichier JavaScript -->
+  <script src="script.js">
+  </script>
+ </body>
+</html>

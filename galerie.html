@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Galerie – Terre Azur
+  </title>
+  <meta content="Terre Azur, galerie d’art et boutique de sculptures uniques, façonnées par la terre, inspirées par la mer." name="description"/>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;600&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&amp;display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <!-- EN-TÊTE : logo, menu et icônes -->
+  <header class="site-header">
+   <a class="logo" href="index.html">
+    <img alt="Terre Azur – Sculptures &amp; Art" height="158" src="images/logo.png" width="548"/>
+   </a>
+   <button aria-controls="menu" aria-expanded="false" aria-label="Ouvrir le menu" class="burger" type="button">
+    ☰
+   </button>
+   <nav aria-label="Navigation principale" id="menu">
+    <ul>
+     <li>
+      <a href="index.html">
+       Accueil
+      </a>
+     </li>
+     <li>
+      <a href="boutique.html">
+       Boutique
+      </a>
+     </li>
+     <li>
+      <a href="a-propos.html">
+       À propos
+      </a>
+     </li>
+     <li>
+      <a aria-current="page" href="galerie.html">
+       Galerie
+      </a>
+     </li>
+     <li>
+      <a href="contact.html">
+       Contact
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div class="tools">
+    <button aria-label="Rechercher" type="button">
+     ⌕
+    </button>
+    <button aria-label="Mon compte" type="button">
+     ☺
+    </button>
+    <button aria-label="Panier" class="cart" type="button">
+     🛒
+     <span id="cart-count">
+      0
+     </span>
+    </button>
+   </div>
+  </header>
+  <!-- CONTENU PRINCIPAL de la page -->
+  <main>
+   <!-- BANNIÈRE du haut de page (image de fond + titre) -->
+   <section class="hero hero-galerie">
+    <div class="in">
+     <p class="eyebrow">
+     </p>
+     <h1>
+      Galerie
+     </h1>
+     <p>
+      L’artisanat dans son environnement. Une fenêtre sur notre univers créatif.
+     </p>
+    </div>
+   </section>
+   <!-- SECTION de contenu -->
+   <section class="sec">
+    <h2>
+     Les Ateliers &amp; Les Œuvres
+    </h2>
+    <h3 class="sub2">
+     Moments d’Atelier
+    </h3>
+    <ul class="grid3">
+     <li>
+      <figure>
+       <img alt="Mains façonnant l’argile" loading="lazy" src="images/moment-geste.jpg"/>
+       <figcaption>
+        Le geste – Façonner la terre
+       </figcaption>
+      </figure>
+     </li>
+     <li>
+      <figure>
+       <img alt="Outils de l’artiste sur un buste" loading="lazy" src="images/moment-matiere.jpg"/>
+       <figcaption>
+        La matière – Outils de l’artiste
+       </figcaption>
+      </figure>
+     </li>
+     <li>
+      <figure>
+       <img alt="Pots de pigments et d’émaux" loading="lazy" src="images/moment-cuisson.jpg"/>
+       <figcaption>
+        La cuisson – L’alchimie de la terre
+       </figcaption>
+      </figure>
+     </li>
+    </ul>
+    <h3 class="sub2">
+     L’Espace Galerie
+    </h3>
+    <ul class="grid2">
+     <li>
+      <img alt="Sculpture bleue dans une niche" loading="lazy" src="images/galerie-1.jpg"/>
+     </li>
+     <li>
+      <img alt="Sculpture bleue face à la mer" loading="lazy" src="images/galerie-2.jpg"/>
+     </li>
+     <li>
+      <img alt="Étagère de sculptures et de livres" loading="lazy" src="images/galerie-3.jpg"/>
+     </li>
+     <li>
+      <img alt="Buste et plante verte" loading="lazy" src="images/galerie-4.jpg"/>
+     </li>
+    </ul>
+    <ul class="grid4">
+     <li>
+      <figure>
+       <img alt="Horizon Lumineux" loading="lazy" src="images/horizon-lumineux.jpg"/>
+       <figcaption>
+        Horizon Lumineux
+       </figcaption>
+      </figure>
+     </li>
+     <li>
+      <figure>
+       <img alt="L’Oiseau de Mer" loading="lazy" src="images/oiseau-de-mer.jpg"/>
+       <figcaption>
+        L’Oiseau de Mer
+       </figcaption>
+      </figure>
+     </li>
+     <li>
+      <figure>
+       <img alt="Galet d’Écume" loading="lazy" src="images/galet-ecume.jpg"/>
+       <figcaption>
+        Galet d’Écume
+       </figcaption>
+      </figure>
+     </li>
+     <li>
+      <figure>
+       <img alt="Élan Pruines" loading="lazy" src="images/don-pruines.jpg"/>
+       <figcaption>
+        Élan Pruines
+       </figcaption>
+      </figure>
+     </li>
+    </ul>
+   </section>
+  </main>
+  <!-- PIED DE PAGE : newsletter et mentions -->
+  <footer class="site-footer">
+   <img alt="Terre Azur" class="flogo" height="158" src="images/logo.png" width="548"/>
+   <!-- FORMULAIRE newsletter -->
+   <form class="news" id="news">
+    <label for="mail">
+     Recevez nos nouveautés et inspirations
+    </label>
+    <div>
+     <input id="mail" name="mail" placeholder="Votre adresse e-mail" required="" type="email"/>
+     <button class="btn" type="submit">
+      S’inscrire
+     </button>
+    </div>
+    <p id="news-msg" role="status">
+    </p>
+   </form>
+   <p class="legal">
+    © 2025 Terre Azur. Tous droits réservés. · Mentions légales · CGV · Contact
+   </p>
+  </footer>
+  <!-- On relie le fichier JavaScript -->
+  <script src="script.js">
+  </script>
+ </body>
+</html>

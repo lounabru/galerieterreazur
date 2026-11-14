@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fr">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   La boutique – Terre Azur
+  </title>
+  <meta content="Terre Azur, galerie d’art et boutique de sculptures uniques, façonnées par la terre, inspirées par la mer." name="description"/>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;600&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&amp;display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <!-- EN-TÊTE : logo, menu et icônes -->
+  <header class="site-header">
+   <a class="logo" href="index.html">
+    <img alt="Terre Azur – Sculptures &amp; Art" height="158" src="images/logo.png" width="548"/>
+   </a>
+   <button aria-controls="menu" aria-expanded="false" aria-label="Ouvrir le menu" class="burger" type="button">
+    ☰
+   </button>
+   <nav aria-label="Navigation principale" id="menu">
+    <ul>
+     <li>
+      <a href="index.html">
+       Accueil
+      </a>
+     </li>
+     <li>
+      <a aria-current="page" href="boutique.html">
+       Boutique
+      </a>
+     </li>
+     <li>
+      <a href="a-propos.html">
+       À propos
+      </a>
+     </li>
+     <li>
+      <a href="galerie.html">
+       Galerie
+      </a>
+     </li>
+     <li>
+      <a href="contact.html">
+       Contact
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div class="tools">
+    <button aria-label="Rechercher" type="button">
+     ⌕
+    </button>
+    <button aria-label="Mon compte" type="button">
+     ☺
+    </button>
+    <button aria-label="Panier" class="cart" type="button">
+     🛒
+     <span id="cart-count">
+      0
+     </span>
+    </button>
+   </div>
+  </header>
+  <!-- CONTENU PRINCIPAL de la page -->
+  <main>
+   <!-- BANNIÈRE du haut de page (image de fond + titre) -->
+   <section class="hero hero-accueil">
+    <div class="in">
+     <p class="eyebrow">
+      Artisanat d’exception
+     </p>
+     <h1>
+      La boutique
+     </h1>
+     <p>
+      Découvrez nos sculptures uniques, façonnées à la main par notre atelier, entre terre, pierre et mer.
+     </p>
+    </div>
+   </section>
+   <!-- SECTION de contenu -->
+   <section class="sec">
+    <div aria-label="Filtrer les pièces" class="filters" role="group">
+     <button class="on" data-f="all" type="button">
+      Toutes les pièces
+     </button>
+     <button data-f="abstraites" type="button">
+      Abstraites
+     </button>
+     <button data-f="figuratives" type="button">
+      Figuratives
+     </button>
+     <button data-f="marines" type="button">
+      Marines
+     </button>
+     <button data-f="pierre" type="button">
+      En pierre
+     </button>
+    </div>
+    <ul class="grid4 shop" id="shop">
+     <li class="card" data-cat="figuratives">
+      <img alt="Sculpture Équilibre" loading="lazy" src="images/equilibre.jpg"/>
+      <div>
+       <h3>
+        Équilibre
+       </h3>
+       <p>
+        220 €
+       </p>
+      </div>
+      <button aria-label="Ajouter Équilibre au panier" class="add" type="button">
+       🛒
+      </button>
+     </li>
+     <li class="card" data-cat="figuratives">
+      <img alt="Sculpture Regard lointain" loading="lazy" src="images/regard-lointain.jpg"/>
+      <div>
+       <h3>
+        Regard lointain
+       </h3>
+       <p>
+        380 €
+       </p>
+      </div>
+      <button aria-label="Ajouter Regard lointain au panier" class="add" type="button">
+       🛒
+      </button>
+     </li>
+     <li class="card" data-cat="marines">
+      <img alt="Sculpture Vague intérieure" loading="lazy" src="images/vague-interieure.jpg"/>
+      <div>
+       <h3>
+        Vague intérieure
+       </h3>
+       <p>
+        450 €
+       </p>
+      </div>
+      <button aria-label="Ajouter Vague intérieure au panier" class="add" type="button">
+       🛒
+      </button>
+     </li>
+     <li class="card" data-cat="pierre">
+      <img alt="Sculpture Cercle d’océan" loading="lazy" src="images/cercle-ocean.jpg"/>
+      <div>
+       <h3>
+        Cercle d’océan
+       </h3>
+       <p>
+        420 €
+       </p>
+      </div>
+      <button aria-label="Ajouter Cercle d’océan au panier" class="add" type="button">
+       🛒
+      </button>
+     </li>
+     <li class="card" data-cat="abstraites">
+      <img alt="Sculpture Élan" loading="lazy" src="images/p-elan.jpg"/>
+      <div>
+       <h3>
+        Élan
+       </h3>
+       <p>
+        360 €
+       </p>
+      </div>
+      <button aria-label="Ajouter Élan au panier" class="add" type="button">
+       🛒
+      </button>
+     </li>
+     <li class="card" data-cat="figuratives">
+      <img alt="Sculpture Sérénité" loading="lazy" src="images/p-serenite.jpg"/>
+      <div>
+       <h3>
+        Sérénité
+       </h3>
+       <p>
+        340 €
+       </p>
+      </div>
+      <button aria-label="Ajouter Sérénité au panier" class="add" type="button">
+       🛒
+      </button>
+     </li>
+     <li class="card" data-cat="abstraites">
+      <img alt="Sculpture Racines" loading="lazy" src="images/p-racines.jpg"/>
+      <div>
+       <h3>
+        Racines
+       </h3>
+       <p>
+        280 €
+       </p>
+      </div>
+      <button aria-label="Ajouter Racines au panier" class="add" type="button">
+       🛒
+      </button>
+     </li>
+     <li class="card" data-cat="marines">
+      <img alt="Sculpture Marée" loading="lazy" src="images/p-maree.jpg"/>
+      <div>
+       <h3>
+        Marée
+       </h3>
+       <p>
+        420 €
+       </p>
+      </div>
+      <button aria-label="Ajouter Marée au panier" class="add" type="button">
+       🛒
+      </button>
+     </li>
+     <li class="card" data-cat="pierre">
+      <img alt="Sculpture Origine" loading="lazy" src="images/p-origine.jpg"/>
+      <div>
+       <h3>
+        Origine
+       </h3>
+       <p>
+        370 €
+       </p>
+      </div>
+      <button aria-label="Ajouter Origine au panier" class="add" type="button">
+       🛒
+      </button>
+     </li>
+     <li class="card" data-cat="abstraites">
+      <img alt="Sculpture Lumière" loading="lazy" src="images/p-lumiere.jpg"/>
+      <div>
+       <h3>
+        Lumière
+       </h3>
+       <p>
+        300 €
+       </p>
+      </div>
+      <button aria-label="Ajouter Lumière au panier" class="add" type="button">
+       🛒
+      </button>
+     </li>
+     <li class="card" data-cat="abstraites">
+      <img alt="Sculpture Horizon" loading="lazy" src="images/p-horizon.jpg"/>
+      <div>
+       <h3>
+        Horizon
+       </h3>
+       <p>
+        430 €
+       </p>
+      </div>
+      <button aria-label="Ajouter Horizon au panier" class="add" type="button">
+       🛒
+      </button>
+     </li>
+     <li class="card" data-cat="marines">
+      <img alt="Sculpture Bleu profond" loading="lazy" src="images/p-bleu-profond.jpg"/>
+      <div>
+       <h3>
+        Bleu profond
+       </h3>
+       <p>
+        460 €
+       </p>
+      </div>
+      <button aria-label="Ajouter Bleu profond au panier" class="add" type="button">
+       🛒
+      </button>
+     </li>
+    </ul>
+   </section>
+  </main>
+  <!-- PIED DE PAGE : newsletter et mentions -->
+  <footer class="site-footer">
+   <img alt="Terre Azur" class="flogo" height="158" src="images/logo.png" width="548"/>
+   <!-- FORMULAIRE newsletter -->
+   <form class="news" id="news">
+    <label for="mail">
+     Recevez nos nouveautés et inspirations
+    </label>
+    <div>
+     <input id="mail" name="mail" placeholder="Votre adresse e-mail" required="" type="email"/>
+     <button class="btn" type="submit">
+      S’inscrire
+     </button>
+    </div>
+    <p id="news-msg" role="status">
+    </p>
+   </form>
+   <p class="legal">
+    © 2025 Terre Azur. Tous droits réservés. · Mentions légales · CGV · Contact
+   </p>
+  </footer>
+  <!-- On relie le fichier JavaScript -->
+  <script src="script.js">
+  </script>
+ </body>
+</html>
