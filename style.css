@@ -515,3 +515,49 @@ figure {
     --bg: url(images/hero-histoire.jpg);
 }
 
+.tools {
+    position: relative;
+}
+
+.cart-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: #fff;
+    border: 1px solid #ddd5c6;
+    width: 260px;
+    padding: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    font-size: 0.85rem;
+    color: var(--texte);
+}
+
+.cart-dropdown.open {
+    display: block;
+}
+
+.cart-dropdown ul {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 0.8rem;
+    list-style: none;
+    padding: 0;
+}
+
+.cart-dropdown li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #f1ede5;
+    padding-bottom: 0.3rem;
+}
+
+.cart-total {
+    font-weight: bold;
+    border-top: 1px solid var(--bleu);
+    padding-top: 0.5rem;
+    text-align: right;
+    color: var(--bleu);
+}
