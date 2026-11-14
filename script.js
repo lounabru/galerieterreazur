@@ -266,3 +266,241 @@ if (params.get('q') && document.getElementById('shop')) {
     searchInput.value = params.get('q');
     rechercher(params.get('q'));
 }
+
+// ===== 6. COMPTE CLIENT (smiley) =====
+// SIMULATION : les comptes sont enregistrés dans le navigateur (localStorage),
+// pas sur un serveur. Un compte créé sur un appareil n'existe pas sur un autre.
+var boutonCompte = document.querySelector('[aria-label="Mon compte"]');
+
+// Création de la fenêtre du compte
+var modalCompte = document.createElement('div');
+modalCompte.className = 'acc-modal';
+modalCompte.innerHTML =
+    '<div class="acc-box" role="dialog" aria-label="Mon compte">' +
+        '<button type="button" class="acc-close" id="acc-close" aria-label="Fermer">✕</button>' +
+
+        // Partie affichée quand on n'est pas connecté
+        '<div id="acc-guest">' +
+            '<div class="acc-tabs">' +
+                '<button type="button" class="acc-tab on" id="acc-tab-login">Se connecter</button>' +
+                '<button type="button" class="acc-tab" id="acc-tab-signup">Créer un compte</button>' +
+            '</div>' +
+            '<form id="acc-login-form">' +
+                '<label for="acc-login-email">E-mail</label>' +
+                '<input type="email" id="acc-login-email" required autocomplete="email">' +
+                '<label for="acc-login-mdp">Mot de passe</label>' +
+                '<input type="password" id="acc-login-mdp" required autocomplete="current-password">' +
+                '<button type="submit" class="btn">Se connecter</button>' +
+            '</form>' +
+            '<form id="acc-signup-form" hidden>' +
+                '<label for="acc-signup-nom">Nom complet</label>' +
+                '<input type="text" id="acc-signup-nom" required autocomplete="name">' +
+                '<label for="acc-signup-email">E-mail</label>' +
+                '<input type="email" id="acc-signup-email" required autocomplete="email">' +
+                '<label for="acc-signup-mdp">Mot de passe (6 caractères minimum)</label>' +
+                '<input type="password" id="acc-signup-mdp" required minlength="6" autocomplete="new-password">' +
+                '<button type="submit" class="btn">Créer mon compte</button>' +
+            '</form>' +
+        '</div>' +
+
+        // Partie affichée quand on est connecté
+        '<div id="acc-user" hidden>' +
+            '<h3 id="acc-hello"></h3>' +
+            '<p id="acc-email"></p>' +
+            '<button type="button" class="btn" id="acc-logout">Se déconnecter</button>' +
+        '</div>' +
+
+        '<p id="acc-msg" role="status"></p>' +
+    '</div>';
+document.body.appendChild(modalCompte);
+
+var accClose = document.getElementById('acc-close');
+var accGuest = document.getElementById('acc-guest');
+var accUser = document.getElementById('acc-user');
+var accTabLogin = document.getElementById('acc-tab-login');
+var accTabSignup = document.getElementById('acc-tab-signup');
+var accLoginForm = document.getElementById('acc-login-form');
+var accSignupForm = document.getElementById('acc-signup-form');
+var accHello = document.getElementById('acc-hello');
+var accEmail = document.getElementById('acc-email');
+var accLogout = document.getElementById('acc-logout');
+var accMsg = document.getElementById('acc-msg');
+
+// --- Enregistrement dans le navigateur ---
+function lireComptes() {
+    try {
+        return JSON.parse(localStorage.getItem('terreazur_comptes')) || {};
+    } catch (err) {
+        return {};
+    }
+}
+
+function ecrireComptes(comptes) {
+    try {
+        localStorage.setItem('terreazur_comptes', JSON.stringify(comptes));
+        return true;
+    } catch (err) {
+        return false;
+    }
+}
+
+function lireSession() {
+    try {
+        return localStorage.getItem('terreazur_connecte');
+    } catch (err) {
+        return null;
+    }
+}
+
+function ecrireSession(email) {
+    try {
+        if (email) {
+            localStorage.setItem('terreazur_connecte', email);
+        } else {
+            localStorage.removeItem('terreazur_connecte');
+        }
+    } catch (err) {
+        // navigation privée : on ignore
+    }
+}
+
+// Le mot de passe n'est jamais enregistré en clair : on garde seulement son empreinte
+function hacher(texte) {
+    if (window.crypto && window.crypto.subtle && window.TextEncoder) {
+        return window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(texte)).then(function (buf) {
+            return Array.prototype.map.call(new Uint8Array(buf), function (o) {
+                return ('0' + o.toString(16)).slice(-2);
+            }).join('');
+        });
+    }
+    return Promise.resolve('b64:' + btoa(encodeURIComponent(texte)));
+}
+
+// --- Affichage ---
+function changerOnglet(mode) {
+    var connexion = (mode === 'connexion');
+    accLoginForm.hidden = !connexion;
+    accSignupForm.hidden = connexion;
+    if (connexion) {
+        accTabLogin.classList.add('on');
+        accTabSignup.classList.remove('on');
+    } else {
+        accTabSignup.classList.add('on');
+        accTabLogin.classList.remove('on');
+    }
+    accMsg.textContent = '';
+}
+
+function afficherEtat() {
+    var email = lireSession();
+    var comptes = lireComptes();
+    if (email && comptes[email]) {
+        accGuest.hidden = true;
+        accUser.hidden = false;
+        accHello.textContent = 'Bonjour ' + comptes[email].nom + ' !';
+        accEmail.textContent = email;
+    } else {
+        accGuest.hidden = false;
+        accUser.hidden = true;
+    }
+}
+
+function ouvrirCompte() {
+    cartDropdown.classList.remove('open');
+    if (typeof searchBox !== 'undefined') {
+        searchBox.classList.remove('open');
+    }
+    changerOnglet('connexion');
+    afficherEtat();
+    modalCompte.classList.add('open');
+}
+
+function fermerCompte() {
+    modalCompte.classList.remove('open');
+}
+
+// --- Clics ---
+if (boutonCompte) {
+    boutonCompte.addEventListener('click', ouvrirCompte);
+}
+
+accClose.addEventListener('click', fermerCompte);
+
+// Cliquer sur le fond sombre ferme la fenêtre
+modalCompte.addEventListener('click', function (e) {
+    if (e.target === modalCompte) {
+        fermerCompte();
+    }
+});
+
+// La touche Échap ferme la fenêtre
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+        fermerCompte();
+    }
+});
+
+accTabLogin.addEventListener('click', function () {
+    changerOnglet('connexion');
+});
+
+accTabSignup.addEventListener('click', function () {
+    changerOnglet('inscription');
+});
+
+// --- Créer un compte ---
+accSignupForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var nom = document.getElementById('acc-signup-nom').value.trim();
+    var email = document.getElementById('acc-signup-email').value.trim().toLowerCase();
+    var mdp = document.getElementById('acc-signup-mdp').value;
+    var comptes = lireComptes();
+
+    if (mdp.length < 6) {
+        accMsg.textContent = 'Le mot de passe doit contenir au moins 6 caractères.';
+        return;
+    }
+    if (comptes[email]) {
+        accMsg.textContent = 'Un compte existe déjà avec cet e-mail.';
+        return;
+    }
+
+    hacher(email + '|' + mdp).then(function (empreinte) {
+        comptes[email] = { nom: nom, hash: empreinte };
+        if (!ecrireComptes(comptes)) {
+            accMsg.textContent = 'Impossible d’enregistrer le compte sur cet appareil.';
+            return;
+        }
+        ecrireSession(email);
+        accSignupForm.reset();
+        afficherEtat();
+        accMsg.textContent = 'Compte créé, bienvenue chez Terre Azur !';
+    });
+});
+
+// --- Se connecter ---
+accLoginForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = document.getElementById('acc-login-email').value.trim().toLowerCase();
+    var mdp = document.getElementById('acc-login-mdp').value;
+    var comptes = lireComptes();
+
+    hacher(email + '|' + mdp).then(function (empreinte) {
+        if (comptes[email] && comptes[email].hash === empreinte) {
+            ecrireSession(email);
+            accLoginForm.reset();
+            afficherEtat();
+            accMsg.textContent = 'Connexion réussie.';
+        } else {
+            accMsg.textContent = 'E-mail ou mot de passe incorrect.';
+        }
+    });
+});
+
+// --- Se déconnecter ---
+accLogout.addEventListener('click', function () {
+    ecrireSession(null);
+    afficherEtat();
+    changerOnglet('connexion');
+    accMsg.textContent = 'Vous êtes déconnecté(e).';
+});
