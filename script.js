@@ -14,17 +14,7 @@ var toolsContainer = document.querySelector('.tools');
 var compteur = document.getElementById('cart-count');
 var boutonsAjout = document.querySelectorAll('.add');
 var panier = [];
-boutonsAjout.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-        var card = this.closest('.card');
-        var nom = card.querySelector('h3').textContent.trim();
-        var prix = parseInt(card.querySelector('p').textContent.trim());
-        panier.push({ nom: nom, prix: prix });
-        if (compteur) {
-            compteur.textContent = panier.length;
-        }
-    });
-});
+
 // Création du menu déroulant du panier
 var cartDropdown = document.createElement('div');
 cartDropdown.className = 'cart-dropdown';
@@ -159,6 +149,7 @@ for (var j = 0; j < filtres.length; j++) {
 }
            }
 });
+}
 
 // ===== 4. FORMULAIRES (message de confirmation) =====
 var newsletter = document.getElementById('news');
