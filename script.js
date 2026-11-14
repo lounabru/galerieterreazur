@@ -168,3 +168,43 @@ if (contact) {
         contact.reset();
     });
 }
+
+// ===== 5. RECHERCHE INTERACTIVE =====
+var searchBtn = document.querySelector('.site-header .tools button[aria-label="Rechercher"]');
+if (searchBtn) {
+    var searchContainer = document.createElement('div');
+    searchContainer.className = 'search-container';
+    searchContainer.innerHTML = '<input type="text" id="site-search" placeholder="Rechercher une œuvre..." style="display:none; padding:0.3rem 0.5rem; font-size:0.8rem; border:1px solid #ddd5c6; border-radius:4px; margin-right:0.5rem;">';
+    searchBtn.parentNode.insertBefore(searchContainer, searchBtn);
+
+    var searchInput = document.getElementById('site-search');
+
+    searchBtn.addEventListener('click', function () {
+        if (searchInput.style.display === 'none') {
+            searchInput.style.display = 'inline-block';
+            searchInput.focus();
+        } else {
+            searchInput.style.display = 'none';
+            searchInput.value = '';
+            filtrerRecherche('');
+        }
+    });
+
+    searchInput.addEventListener('input', function () {
+        filtrerRecherche(this.value.toLowerCase());
+    });
+}
+
+function filtrerRecherche(terme) {
+    var produits = document.querySelectorAll('.card');
+    if (produits.length === 0) return;
+    
+    produits.forEach(function (card) {
+        var titre = card.querySelector('h3').textContent.toLowerCase();
+        if (titre.includes(terme)) {
+            card.style.display = '';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
