@@ -177,12 +177,14 @@ if (searchBtn && toolsContainer) {
     var searchInput = document.createElement('input');
     searchInput.type = 'text';
     searchInput.id = 'site-search';
-    searchInput.placeholder = 'Rechercher...';
+    searchInput.placeholder = 'Rechercher une œuvre...';
     searchInput.style.display = 'none';
-    searchInput.style.width = '100px';
-    searchInput.style.padding = '0.2rem';
-    searchInput.style.fontSize = '0.75rem';
-    searchInput.style.border = '1px solid #ddd5c6';
+    searchInput.style.width = '140px';
+    searchInput.style.padding = '0.3rem 0.5rem';
+    searchInput.style.fontSize = '0.8rem';
+    searchInput.style.border = '1px solid var(--bleu)';
+    searchInput.style.borderRadius = '4px';
+    searchInput.style.background = '#fff';
     
     toolsContainer.insertBefore(searchInput, searchBtn);
 
