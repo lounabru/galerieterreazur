@@ -142,9 +142,10 @@ for (var j = 0; j < filtres.length; j++) {
         // On affiche ou on cache chaque produit selon sa catégorie
         for (var b = 0; b < produits.length; b++) {
             if (choix === 'all' || produits[b].dataset.cat === choix) {
-                produits[b].hidden = false;
-            } else {
-                produits[b].hidden = true;
+    produits[b].style.display = '';
+} else {
+    produits[b].style.display = 'none';
+}
             }
         }
     });
