@@ -8,17 +8,65 @@ bouton.addEventListener('click', function () {
     menu.classList.toggle('open');
 });
 
-// ===== 2. COMPTEUR DU PANIER =====
-var nombre = 0;
+// ===== 2. PANIER ET MENU DÉROULANT =====
+var cartButton = document.querySelector('.cart');
+var toolsContainer = document.querySelector('.tools');
 var compteur = document.getElementById('cart-count');
 var boutonsAjout = document.querySelectorAll('.add');
 
-// Pour chaque bouton panier, on ajoute 1 au clic
+// Création du conteneur déroulant
+var cartDropdown = document.createElement('div');
+cartDropdown.className = 'cart-dropdown';
+cartDropdown.innerHTML = '<ul id="cart-items"><li>Votre panier est vide</li></ul><div class="cart-total" id="cart-total">Total : 0 €</div>';
+toolsContainer.appendChild(cartDropdown);
+
+var cartItemsList = document.getElementById('cart-items');
+var cartTotalElem = document.getElementById('cart-total');
+var panier = [];
+
+// Ouvrir / fermer au clic sur l'icône
+cartButton.addEventListener('click', function (e) {
+    e.stopPropagation();
+    cartDropdown.classList.toggle('open');
+});
+
+// Fermer en cliquant ailleurs sur la page
+document.addEventListener('click', function (e) {
+    if (!toolsContainer.contains(e.target)) {
+        cartDropdown.classList.remove('open');
+    }
+});
+
+// Ajout des produits
 for (var i = 0; i < boutonsAjout.length; i++) {
     boutonsAjout[i].addEventListener('click', function () {
-        nombre = nombre + 1;
-        compteur.textContent = nombre;
+        var card = this.closest('.card');
+        var nom = card.querySelector('h3').textContent.trim();
+        var prixTexte = card.querySelector('p').textContent.trim();
+        var prix = parseInt(prixTexte);
+
+        panier.push({ nom: nom, prix: prix });
+        mettreAJourPanier();
     });
+}
+
+function mettreAJourPanier() {
+    compteur.textContent = panier.length;
+    
+    if (panier.length === 0) {
+        cartItemsList.innerHTML = '<li>Votre panier est vide</li>';
+        cartTotalElem.textContent = 'Total : 0 €';
+        return;
+    }
+
+    var html = '';
+    var total = 0;
+    for (var j = 0; j < panier.length; j++) {
+        html += '<li><span>' + panier[j].nom + '</span><span>' + panier[j].prix + ' €</span></li>';
+        total += panier[j].prix;
+    }
+    cartItemsList.innerHTML = html;
+    cartTotalElem.textContent = 'Total : ' + total + ' €';
 }
 
 // ===== 3. FILTRES DE LA BOUTIQUE =====
